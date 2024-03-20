@@ -1,13 +1,20 @@
 package main
 
-import "net/http"
+import (
+	"net/http"
+)
 
 func main() {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/", HomeHandler)
-	mux.Handle("/users", User{Name: "Wend"})
+	// mux := http.NewServeMux()
+	// mux.HandleFunc("/", HomeHandler)
+	// mux.Handle("/users", User{Name: "Wend"})
+	fileServer := http.FileServer(http.Dir("./public"))
+	fileServerMux := http.NewServeMux()
 
-	http.ListenAndServe(":8080", mux)
+	fileServerMux.Handle("/", fileServer)
+
+	// http.ListenAndServe(":8080", mux)
+	http.ListenAndServe(":8080", fileServerMux)
 }
 
 // Approach 1
