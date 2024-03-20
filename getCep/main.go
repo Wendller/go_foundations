@@ -28,7 +28,7 @@ func main() {
 	for _, input := range os.Args[1:] {
 		GET_CEP_URL = fmt.Sprintf("https://viacep.com.br/ws/%s/json", input)
 
-		res, err := http.Get(string(GET_CEP_URL))
+		res, err := http.Get(GET_CEP_URL)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Request error: %v\n", err)
 		}
